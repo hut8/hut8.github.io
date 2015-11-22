@@ -1,0 +1,10 @@
+name: Hut8.io
+url: http://hut8.io
+description: "Liam Bowen's website and programming blog"
+
+permalink: /:year/:month/:day/:title/
+paginate: 20
+highlighter: pygments
+gems: [jekyll-paginate]
+
+exclude: ['README.md', 'Gemfile.lock', 'Gemfile', 'Rakefile']
