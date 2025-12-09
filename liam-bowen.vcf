@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Liam Bowen
+N:Bowen;Liam;;;
+ORG:Supervillain Software Group
+TITLE:Lead Software Engineer
+TEL;TYPE=WORK,VOICE:803-638-3674
+EMAIL;TYPE=WORK:liam@supervillains.io
+ADR;TYPE=WORK:;;701 River Street, Suite 5;Troy;NY;12180;USA
+URL:https://github.com/hut8
+END:VCARD
