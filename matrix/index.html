@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
     <meta name="theme-color" content="#000000">
-    <title>Liam Bowen - HUT8</title>
+    <title>Liam - HUT8</title>
     <style>
         @font-face {
             font-family: 'DOS';
@@ -167,6 +167,38 @@
             color: #ffffff;
         }
 
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 90px;
+            height: 90px;
+            background: rgba(0, 255, 65, 0.08);
+            color: #00ff41;
+            border: 2px solid #00ff41;
+            border-radius: 50%;
+            font-size: 40px;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+            transition: all 0.2s;
+        }
+
+        .action-btn:hover,
+        .action-btn:focus {
+            background: #00ff41;
+            color: #000000;
+            text-shadow: none;
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.5);
+        }
+
         .link-buttons {
             display: flex;
             justify-content: space-between;
@@ -248,15 +280,20 @@
     <div class="container">
         <div class="hero">
             <div class="header-box">
-                <div class="name">Liam Bowen</div>
+                <div class="name">Liam</div>
                 <div class="title">Lead Software Engineer</div>
                 <div class="company">Supervillain Software Group</div>
             </div>
 
             <div class="avatar-section">
-                <img src="../avatar.png" alt="Liam Bowen" class="avatar">
+                <img src="../avatar.png" alt="Liam" class="avatar">
                 <a href="../liam-bowen.vcf" download class="btn">Download vCard</a>
             </div>
+        </div>
+
+        <div class="action-buttons">
+            <a href="tel:+18036383674" class="action-btn" title="Call">📞</a>
+            <a href="sms:+18036383674" class="action-btn" title="Text">💬</a>
         </div>
 
         <div class="section">
