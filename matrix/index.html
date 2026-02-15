@@ -127,8 +127,7 @@
             display: block;
             margin: 0 auto;
             box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
-            filter: grayscale(100%) brightness(0.7) contrast(1.2);
-            mix-blend-mode: screen;
+            filter: grayscale(100%) brightness(0.8) sepia(100%) hue-rotate(70deg) saturate(500%);
         }
 
         .avatar-rain {
@@ -139,6 +138,7 @@
             height: 100%;
             pointer-events: none;
             z-index: 2;
+            mix-blend-mode: lighten;
         }
 
         .btn {
@@ -420,7 +420,7 @@
 
             function draw() {
                 if (canvas.width === 0) return;
-                ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
                 ctx.font = fontSize + 'px monospace';
@@ -430,19 +430,18 @@
                     var x = i * fontSize;
                     var y = drops[i] * fontSize;
 
-                    if (Math.random() > 0.7) {
-                        ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                    if (Math.random() > 0.8) {
+                        ctx.fillStyle = '#ffffff';
                     } else {
-                        ctx.fillStyle = 'rgba(0, 255, 65, 0.4)';
+                        ctx.fillStyle = '#00ff41';
                     }
 
                     ctx.fillText(char, x, y);
 
-                    if (y > canvas.height && Math.random() > 0.95) {
+                    if (y > canvas.height && Math.random() > 0.96) {
                         drops[i] = 0;
                     }
                     drops[i]++;
-                }
             }
 
             setInterval(draw, 60);
