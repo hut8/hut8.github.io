@@ -40,6 +40,7 @@
             width: 100%;
             height: 100%;
             z-index: 0;
+            opacity: 0.7;
         }
 
         .container {
@@ -116,6 +117,7 @@
         .avatar-section {
             text-align: center;
             width: 100%;
+            position: relative;
         }
 
         .avatar {
@@ -125,7 +127,18 @@
             display: block;
             margin: 0 auto;
             box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
-            filter: grayscale(100%) brightness(0.8) sepia(100%) hue-rotate(70deg) saturate(500%);
+            filter: grayscale(100%) brightness(0.7) contrast(1.2);
+            mix-blend-mode: screen;
+        }
+
+        .avatar-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
         }
 
         .btn {
@@ -150,6 +163,18 @@
             color: #000000;
             text-shadow: none;
             box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+        }
+
+        .btn:hover svg,
+        .btn:focus svg {
+            stroke: #000000;
+        }
+
+        .btn-full {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
         }
 
         .btn-secondary {
@@ -290,7 +315,8 @@
 
             <div class="avatar-section">
                 <img src="../avatar.png" alt="Liam" class="avatar">
-                <a href="../liam-bowen.vcf" download class="btn">Download vCard</a>
+                <canvas class="avatar-rain" id="avatar-rain"></canvas>
+                <a href="../liam-bowen.vcf" download class="btn btn-full"><i data-lucide="user-plus" width="20" height="20" style="vertical-align: middle; margin-right: 8px;"></i>Add Contact</a>
             </div>
         </div>
 
@@ -300,15 +326,10 @@
             <a href="mailto:liam@supervillains.io" class="action-btn" title="Email"><i data-lucide="mail" width="40" height="40"></i></a>
         </div>
 
-        <div class="section">
-            <h2>LINKS</h2>
-            <div class="link-buttons">
-                <a href="https://github.com/hut8" target="_blank" rel="noopener" class="btn-secondary">GitHub</a>
-                <a href="https://linkedin.com/in/liambowen" target="_blank" rel="noopener" class="btn-secondary">LinkedIn</a>
-            </div>
+        <div class="action-buttons">
+            <a href="https://github.com/hut8" target="_blank" rel="noopener" class="action-btn" title="GitHub"><i data-lucide="github" width="40" height="40"></i></a>
+            <a href="https://linkedin.com/in/liambowen" target="_blank" rel="noopener" class="action-btn" title="LinkedIn"><i data-lucide="linkedin" width="40" height="40"></i></a>
         </div>
-
-        <hr>
 
         <p>> <span class="cursor"></span></p>
     </div>
@@ -336,7 +357,7 @@
             var chars = 'abcdefghijklmnopqrstuvwxyz0123456789$+-*/=%"\'#&_(),.;:?!\\|{}<>[]^~';
 
             function draw() {
-                ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.07)';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
                 ctx.fillStyle = '#00ff41';
@@ -364,6 +385,67 @@
             }
 
             setInterval(draw, 50);
+        })();
+    </script>
+    <script>
+        // Rain overlay on avatar
+        (function() {
+            var canvas = document.getElementById('avatar-rain');
+            var ctx = canvas.getContext('2d');
+            var img = document.querySelector('.avatar');
+
+            function resize() {
+                canvas.width = img.offsetWidth;
+                canvas.height = img.offsetHeight;
+            }
+
+            img.addEventListener('load', resize);
+            window.addEventListener('resize', resize);
+            resize();
+
+            var fontSize = 12;
+            var drops = [];
+
+            function initDrops() {
+                var cols = Math.floor(canvas.width / fontSize);
+                drops = [];
+                for (var i = 0; i < cols; i++) {
+                    drops[i] = Math.random() * -50;
+                }
+            }
+            initDrops();
+            window.addEventListener('resize', initDrops);
+
+            var chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+
+            function draw() {
+                if (canvas.width === 0) return;
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                ctx.font = fontSize + 'px monospace';
+
+                for (var i = 0; i < drops.length; i++) {
+                    var char = chars[Math.floor(Math.random() * chars.length)];
+                    var x = i * fontSize;
+                    var y = drops[i] * fontSize;
+
+                    if (Math.random() > 0.7) {
+                        ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                    } else {
+                        ctx.fillStyle = 'rgba(0, 255, 65, 0.4)';
+                    }
+
+                    ctx.fillText(char, x, y);
+
+                    if (y > canvas.height && Math.random() > 0.95) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+
+            setInterval(draw, 60);
         })();
     </script>
     <script>lucide.createIcons();</script>
