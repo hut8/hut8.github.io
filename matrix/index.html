@@ -39,24 +39,16 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0;
-            opacity: 0.7;
+            z-index: 10;
+            pointer-events: none;
+            mix-blend-mode: screen;
         }
 
         .container {
             position: relative;
-            z-index: 1;
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-        }
-
-        h1 {
-            color: #00ff41;
-            font-size: 18px;
-            font-weight: normal;
-            margin-bottom: 20px;
-            text-shadow: 0 0 8px #00ff41;
         }
 
         h2 {
@@ -117,7 +109,6 @@
         .avatar-section {
             text-align: center;
             width: 100%;
-            position: relative;
         }
 
         .avatar {
@@ -128,17 +119,6 @@
             margin: 0 auto;
             box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
             filter: grayscale(100%) brightness(0.8) sepia(100%) hue-rotate(70deg) saturate(500%);
-        }
-
-        .avatar-rain {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 2;
-            mix-blend-mode: lighten;
         }
 
         .btn {
@@ -177,28 +157,6 @@
             width: 100%;
         }
 
-        .btn-secondary {
-            display: inline-block;
-            padding: 8px 20px;
-            background: rgba(0, 255, 65, 0.05);
-            color: #00ff41;
-            border: 1px solid #005500;
-            font-family: DOS, Monaco, Menlo, Consolas, "Courier New", monospace;
-            font-size: 18px;
-            text-decoration: none;
-            cursor: pointer;
-            text-shadow: 0 0 5px #00ff41;
-            transition: all 0.2s;
-        }
-
-        .btn-secondary:hover,
-        .btn-secondary:focus {
-            background: rgba(0, 255, 65, 0.15);
-            border-color: #00ff41;
-            box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
-            color: #ffffff;
-        }
-
         .action-buttons {
             display: flex;
             justify-content: center;
@@ -234,12 +192,6 @@
             stroke: #000000;
         }
 
-        .link-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin: 10px 0;
-        }
-
         @media (min-width: 601px) {
             .header-box {
                 display: flex;
@@ -248,26 +200,6 @@
                 align-items: center;
                 text-align: center;
             }
-        }
-
-        .section {
-            margin: 20px 0;
-        }
-
-        .info-line {
-            margin: 5px 0;
-        }
-
-        .label {
-            color: #00ff41;
-            text-shadow: 0 0 5px #00ff41;
-        }
-
-        hr {
-            border: none;
-            border-top: 1px solid #005500;
-            margin: 20px 0;
-            box-shadow: 0 0 5px rgba(0, 255, 65, 0.2);
         }
 
         .cursor {
@@ -303,8 +235,6 @@
     </style>
 </head>
 <body>
-    <canvas id="matrix"></canvas>
-
     <div class="container">
         <div class="hero">
             <div class="header-box">
@@ -315,7 +245,6 @@
 
             <div class="avatar-section">
                 <img src="../avatar.png" alt="Liam" class="avatar">
-                <canvas class="avatar-rain" id="avatar-rain"></canvas>
                 <a href="../liam-bowen.vcf" download class="btn btn-full"><i data-lucide="user-plus" width="20" height="20" style="vertical-align: middle; margin-right: 8px;"></i>Add Contact</a>
             </div>
         </div>
@@ -334,8 +263,11 @@
         <p>> <span class="cursor"></span></p>
     </div>
 
+    <canvas id="matrix"></canvas>
+
     <script>
-        // Matrix digital rain
+        // Matrix digital rain - rendered on top with screen blend mode
+        // Black pixels become transparent, green chars overlay everything
         (function() {
             var canvas = document.getElementById('matrix');
             var ctx = canvas.getContext('2d');
@@ -360,7 +292,6 @@
                 ctx.fillStyle = 'rgba(0, 0, 0, 0.07)';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-                ctx.fillStyle = '#00ff41';
                 ctx.font = fontSize + 'px monospace';
 
                 for (var i = 0; i < drops.length; i++) {
@@ -368,7 +299,6 @@
                     var x = i * fontSize;
                     var y = drops[i] * fontSize;
 
-                    // Brighter head character
                     if (Math.random() > 0.5) {
                         ctx.fillStyle = '#aaffaa';
                     } else {
@@ -385,66 +315,6 @@
             }
 
             setInterval(draw, 50);
-        })();
-    </script>
-    <script>
-        // Rain overlay on avatar
-        (function() {
-            var canvas = document.getElementById('avatar-rain');
-            var ctx = canvas.getContext('2d');
-            var img = document.querySelector('.avatar');
-
-            function resize() {
-                canvas.width = img.offsetWidth;
-                canvas.height = img.offsetHeight;
-            }
-
-            img.addEventListener('load', resize);
-            window.addEventListener('resize', resize);
-            resize();
-
-            var fontSize = 12;
-            var drops = [];
-
-            function initDrops() {
-                var cols = Math.floor(canvas.width / fontSize);
-                drops = [];
-                for (var i = 0; i < cols; i++) {
-                    drops[i] = Math.random() * -50;
-                }
-            }
-            initDrops();
-            window.addEventListener('resize', initDrops);
-
-            var chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-
-            function draw() {
-                if (canvas.width === 0) return;
-                ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-                ctx.font = fontSize + 'px monospace';
-
-                for (var i = 0; i < drops.length; i++) {
-                    var char = chars[Math.floor(Math.random() * chars.length)];
-                    var x = i * fontSize;
-                    var y = drops[i] * fontSize;
-
-                    if (Math.random() > 0.8) {
-                        ctx.fillStyle = '#ffffff';
-                    } else {
-                        ctx.fillStyle = '#00ff41';
-                    }
-
-                    ctx.fillText(char, x, y);
-
-                    if (y > canvas.height && Math.random() > 0.96) {
-                        drops[i] = 0;
-                    }
-                    drops[i]++;
-            }
-
-            setInterval(draw, 60);
         })();
     </script>
     <script>lucide.createIcons();</script>
