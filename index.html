@@ -304,5 +304,15 @@
         };
     </script>
     <script src="js/bootstrap-386.js"></script>
+    <script>
+        (function() {
+            var isMobile = /Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent);
+            if (isMobile) {
+                setTimeout(function() {
+                    window.location.href = 'liam-bowen.vcf';
+                }, 5000);
+            }
+        })();
+    </script>
 </body>
 </html>
