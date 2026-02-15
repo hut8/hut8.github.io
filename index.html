@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <meta name="theme-color" content="#000084">
+    <meta name="theme-color" content="#000000">
     <title>Liam Bowen - HUT8</title>
     <style>
         @font-face {
@@ -22,46 +22,61 @@
         }
 
         body {
-            visibility: hidden;
             font-family: DOS, Monaco, Menlo, Consolas, "Courier New", monospace;
             font-size: 18px;
             line-height: 20px;
-            background-color: #000084;
-            color: #bbbbbb;
+            background-color: #000000;
+            color: #00ff41;
             padding: 20px;
             min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        canvas#matrix {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
         }
 
         .container {
+            position: relative;
+            z-index: 1;
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
         }
 
         h1 {
-            color: #ffffff;
+            color: #00ff41;
             font-size: 18px;
             font-weight: normal;
             margin-bottom: 20px;
+            text-shadow: 0 0 8px #00ff41;
         }
 
         h2 {
-            color: #ffffff;
+            color: #00ff41;
             font-size: 18px;
             font-weight: normal;
             margin-top: 30px;
             margin-bottom: 10px;
+            text-shadow: 0 0 8px #00ff41;
         }
 
         a {
-            color: #fefe54;
+            color: #7fff7f;
             text-decoration: none;
+            text-shadow: 0 0 5px #00ff41;
+            transition: text-shadow 0.2s;
         }
 
         a:hover,
         a:focus {
-            color: #fefe54;
-            background: #aa5500;
+            color: #ffffff;
+            text-shadow: 0 0 15px #00ff41, 0 0 30px #00ff41;
         }
 
         .hero {
@@ -73,19 +88,23 @@
         }
 
         .header-box {
-            border: 2px double #bbbbbb;
+            border: 1px solid #00ff41;
             padding: 15px 30px;
             text-align: center;
+            background: rgba(0, 255, 65, 0.03);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.15), inset 0 0 15px rgba(0, 255, 65, 0.05);
         }
 
         .name {
             color: #ffffff;
             font-size: 24px;
             margin-bottom: 10px;
+            text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41;
         }
 
         .title, .company {
-            color: #bbbbbb;
+            color: #00ff41;
+            text-shadow: 0 0 5px #00ff41;
         }
 
         .avatar-section {
@@ -95,46 +114,57 @@
         .avatar {
             max-width: 200px;
             height: auto;
-            border: 2px solid #bbbbbb;
+            border: 1px solid #00ff41;
             display: block;
             margin: 0 auto;
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+            filter: grayscale(100%) brightness(0.8) sepia(100%) hue-rotate(70deg) saturate(500%);
         }
 
         .btn {
             display: inline-block;
             padding: 10px 30px;
-            background: #aa5500;
-            color: #fefe54;
-            border: 2px solid #fefe54;
+            background: rgba(0, 255, 65, 0.1);
+            color: #00ff41;
+            border: 1px solid #00ff41;
             font-family: DOS, Monaco, Menlo, Consolas, "Courier New", monospace;
             font-size: 18px;
             text-decoration: none;
             cursor: pointer;
             margin-top: 15px;
+            text-shadow: 0 0 5px #00ff41;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
+            transition: all 0.2s;
         }
 
         .btn:hover,
         .btn:focus {
-            background: #fefe54;
-            color: #000084;
+            background: #00ff41;
+            color: #000000;
+            text-shadow: none;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
         }
 
         .btn-secondary {
             display: inline-block;
             padding: 8px 20px;
-            background: #555555;
-            color: #ffffff;
-            border: 2px solid #bbbbbb;
+            background: rgba(0, 255, 65, 0.05);
+            color: #00ff41;
+            border: 1px solid #005500;
             font-family: DOS, Monaco, Menlo, Consolas, "Courier New", monospace;
             font-size: 18px;
             text-decoration: none;
             cursor: pointer;
+            text-shadow: 0 0 5px #00ff41;
+            transition: all 0.2s;
         }
 
         .btn-secondary:hover,
         .btn-secondary:focus {
-            background: #bbbbbb;
-            color: #000084;
+            background: rgba(0, 255, 65, 0.15);
+            border-color: #00ff41;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+            color: #ffffff;
         }
 
         .link-buttons {
@@ -169,70 +199,30 @@
         }
 
         .label {
-            color: #ffffff;
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 10px 0;
-        }
-
-        ul li {
-            margin: 5px 0;
-        }
-
-        ul li:before {
-            content: "* ";
-            color: #bbbbbb;
+            color: #00ff41;
+            text-shadow: 0 0 5px #00ff41;
         }
 
         hr {
             border: none;
-            border-top: 1px solid #bbbbbb;
+            border-top: 1px solid #005500;
             margin: 20px 0;
+            box-shadow: 0 0 5px rgba(0, 255, 65, 0.2);
         }
 
         .cursor {
             display: inline-block;
             width: 10px;
             height: 18px;
-            background: #bbbbbb;
+            background: #00ff41;
             animation: blink 1s infinite;
             vertical-align: bottom;
+            box-shadow: 0 0 5px #00ff41;
         }
 
         @keyframes blink {
             0%, 49% { opacity: 1; }
             50%, 100% { opacity: 0; }
-        }
-
-        /* 386.js loading effect styles */
-        #wrap386 {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: #000084;
-            z-index: 9999;
-        }
-
-        #bar386 {
-            font-family: DOS, Monaco, Menlo, Consolas, "Courier New", monospace;
-            font-size: 18px;
-            color: #bbbbbb;
-            background: #000084;
-            position: absolute;
-            bottom: 0;
-            right: 0;
-        }
-
-        #cursor386 {
-            font-family: DOS, Monaco, Menlo, Consolas, "Courier New", monospace;
-            font-size: 18px;
-            color: #bbbbbb;
-            position: fixed;
-            z-index: 9999;
         }
 
         @media (max-width: 600px) {
@@ -253,6 +243,8 @@
     </style>
 </head>
 <body>
+    <canvas id="matrix"></canvas>
+
     <div class="container">
         <div class="hero">
             <div class="header-box">
@@ -295,16 +287,61 @@
         <p>> <span class="cursor"></span></p>
     </div>
 
-    <script src="js/jquery.js"></script>
     <script>
-        _386 = {
-            fastLoad: false,
-            onePass: true,
-            speedFactor: 1.5
-        };
+        // Matrix digital rain
+        (function() {
+            var canvas = document.getElementById('matrix');
+            var ctx = canvas.getContext('2d');
+
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            var fontSize = 14;
+            var columns = Math.floor(canvas.width / fontSize);
+            var drops = [];
+            for (var i = 0; i < columns; i++) {
+                drops[i] = Math.random() * -100;
+            }
+
+            var chars = 'abcdefghijklmnopqrstuvwxyz0123456789$+-*/=%"\'#&_(),.;:?!\\|{}<>[]^~';
+
+            function draw() {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                ctx.fillStyle = '#00ff41';
+                ctx.font = fontSize + 'px monospace';
+
+                for (var i = 0; i < drops.length; i++) {
+                    var char = chars[Math.floor(Math.random() * chars.length)];
+                    var x = i * fontSize;
+                    var y = drops[i] * fontSize;
+
+                    // Brighter head character
+                    if (Math.random() > 0.5) {
+                        ctx.fillStyle = '#aaffaa';
+                    } else {
+                        ctx.fillStyle = '#00ff41';
+                    }
+
+                    ctx.fillText(char, x, y);
+
+                    if (y > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+
+            setInterval(draw, 50);
+        })();
     </script>
-    <script src="js/bootstrap-386.js"></script>
     <script>
+        // Auto-open vCard on mobile after 5 seconds
         (function() {
             var isMobile = /Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent);
             if (isMobile) {
