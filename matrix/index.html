@@ -85,6 +85,10 @@
             align-items: center;
             gap: 20px;
             margin-bottom: 30px;
+            width: 90vw;
+            max-width: 90vw;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .header-box {
@@ -93,6 +97,7 @@
             text-align: center;
             background: rgba(0, 255, 65, 0.03);
             box-shadow: 0 0 15px rgba(0, 255, 65, 0.15), inset 0 0 15px rgba(0, 255, 65, 0.05);
+            width: 100%;
         }
 
         .name {
@@ -109,10 +114,11 @@
 
         .avatar-section {
             text-align: center;
+            width: 100%;
         }
 
         .avatar {
-            max-width: 200px;
+            width: 100%;
             height: auto;
             border: 1px solid #00ff41;
             display: block;
@@ -206,14 +212,7 @@
         }
 
         @media (min-width: 601px) {
-            .hero {
-                flex-direction: row;
-                align-items: stretch;
-                gap: 40px;
-            }
-
             .header-box {
-                flex: 1;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -293,7 +292,7 @@
 
         <div class="action-buttons">
             <a href="tel:+18036383674" class="action-btn" title="Call">📞</a>
-            <a href="sms:+18036383674" class="action-btn" title="Text">💬</a>
+            <a href="sms:+18036383674?body=Hey%20liam%2C%20its%20" class="action-btn" title="Text">💬</a>
         </div>
 
         <div class="section">
@@ -375,17 +374,6 @@
             }
 
             setInterval(draw, 50);
-        })();
-    </script>
-    <script>
-        // Auto-open vCard on mobile after 5 seconds
-        (function() {
-            var isMobile = /Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent);
-            if (isMobile) {
-                setTimeout(function() {
-                    window.location.href = '../liam-bowen.vcf';
-                }, 5000);
-            }
         })();
     </script>
 </body>
