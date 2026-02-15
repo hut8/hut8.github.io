@@ -192,6 +192,10 @@
             stroke: #000000;
         }
 
+        .link-buttons-mobile {
+            display: none;
+        }
+
         @media (min-width: 601px) {
             .header-box {
                 display: flex;
@@ -218,18 +222,93 @@
         }
 
         @media (max-width: 600px) {
+            html, body {
+                height: 100%;
+                overflow: hidden;
+            }
+
             body {
                 font-size: 16px;
                 line-height: 18px;
-                padding: 10px;
+                padding: 5px;
             }
 
             .container {
-                padding: 10px;
+                padding: 5px;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .hero {
+                gap: 8px;
+                margin-bottom: 10px;
+                width: 100%;
+                max-width: 100%;
             }
 
             .header-box {
                 padding: 8px 15px;
+            }
+
+            .name {
+                margin-bottom: 4px;
+            }
+
+            .avatar-row {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                width: 100%;
+            }
+
+            .avatar-row .action-btn {
+                width: 50px;
+                height: 50px;
+                flex-shrink: 0;
+            }
+
+            .avatar-row .action-btn svg {
+                width: 24px !important;
+                height: 24px !important;
+            }
+
+            .avatar-section {
+                flex: 1;
+                min-width: 0;
+            }
+
+            .link-buttons-mobile {
+                display: flex;
+            }
+
+            .link-buttons-desktop {
+                display: none;
+            }
+
+            .action-buttons {
+                margin: 10px 0;
+                gap: 15px;
+            }
+
+            .action-btn {
+                width: 60px;
+                height: 60px;
+            }
+
+            .action-btn svg {
+                width: 28px !important;
+                height: 28px !important;
+            }
+
+            .btn {
+                margin-top: 8px;
+                padding: 6px 15px;
+                font-size: 14px;
+            }
+
+            .cursor-line {
+                margin: 2px 0;
             }
         }
     </style>
@@ -243,10 +322,14 @@
                 <div class="company">Supervillain Software Group</div>
             </div>
 
-            <div class="avatar-section">
-                <img src="../avatar.png" alt="Liam" class="avatar">
-                <p style="text-align: left;">> <span class="cursor"></span></p>
-                <a href="../liam-bowen.vcf" download class="btn btn-full"><i data-lucide="user-plus" width="20" height="20" style="vertical-align: middle; margin-right: 8px;"></i>Add Contact</a>
+            <div class="avatar-row">
+                <a href="https://github.com/hut8" target="_blank" rel="noopener" class="action-btn link-buttons-mobile" title="GitHub"><i data-lucide="github" width="40" height="40"></i></a>
+                <div class="avatar-section">
+                    <img src="../avatar.png" alt="Liam" class="avatar">
+                    <p class="cursor-line" style="text-align: left;">> <span class="cursor"></span></p>
+                    <a href="../liam-bowen.vcf" download class="btn btn-full"><i data-lucide="user-plus" width="20" height="20" style="vertical-align: middle; margin-right: 8px;"></i>Add Contact</a>
+                </div>
+                <a href="https://linkedin.com/in/liambowen" target="_blank" rel="noopener" class="action-btn link-buttons-mobile" title="LinkedIn"><i data-lucide="linkedin" width="40" height="40"></i></a>
             </div>
         </div>
 
@@ -256,7 +339,7 @@
             <a href="mailto:liam@supervillains.io" class="action-btn" title="Email"><i data-lucide="mail" width="40" height="40"></i></a>
         </div>
 
-        <div class="action-buttons">
+        <div class="action-buttons link-buttons-desktop">
             <a href="https://github.com/hut8" target="_blank" rel="noopener" class="action-btn" title="GitHub"><i data-lucide="github" width="40" height="40"></i></a>
             <a href="https://linkedin.com/in/liambowen" target="_blank" rel="noopener" class="action-btn" title="LinkedIn"><i data-lucide="linkedin" width="40" height="40"></i></a>
         </div>
