@@ -6,6 +6,7 @@
     <meta name="robots" content="noindex, nofollow">
     <meta name="theme-color" content="#000000">
     <title>Liam - HUT8</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         @font-face {
             font-family: 'DOS';
@@ -189,8 +190,6 @@
             background: rgba(0, 255, 65, 0.08);
             color: #00ff41;
             border: 2px solid #00ff41;
-            border-radius: 50%;
-            font-size: 40px;
             text-decoration: none;
             cursor: pointer;
             box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
@@ -203,6 +202,11 @@
             color: #000000;
             text-shadow: none;
             box-shadow: 0 0 30px rgba(0, 255, 65, 0.5);
+        }
+
+        .action-btn:hover svg,
+        .action-btn:focus svg {
+            stroke: #000000;
         }
 
         .link-buttons {
@@ -291,24 +295,10 @@
         </div>
 
         <div class="action-buttons">
-            <a href="tel:+18036383674" class="action-btn" title="Call">📞</a>
-            <a href="sms:+18036383674?body=Hey%20liam%2C%20its%20" class="action-btn" title="Text">💬</a>
+            <a href="tel:+18036383674" class="action-btn" title="Call"><i data-lucide="phone" width="40" height="40"></i></a>
+            <a href="sms:+18036383674?body=Hey%20liam%2C%20its%20" class="action-btn" title="Text"><i data-lucide="message-square" width="40" height="40"></i></a>
+            <a href="mailto:liam@supervillains.io" class="action-btn" title="Email"><i data-lucide="mail" width="40" height="40"></i></a>
         </div>
-
-        <div class="section">
-            <h2>CONTACT</h2>
-            <div class="info-line">
-                <span class="label">Email:</span> <a href="mailto:liam@supervillains.io">liam@supervillains.io</a>
-            </div>
-            <div class="info-line">
-                <span class="label">Phone:</span> <a href="tel:+18036383674">803-638-3674</a>
-            </div>
-            <div class="info-line">
-                <span class="label">Address:</span> 701 River Street, Suite 5, Troy, NY 12180
-            </div>
-        </div>
-
-        <hr>
 
         <div class="section">
             <h2>LINKS</h2>
@@ -376,5 +366,6 @@
             setInterval(draw, 50);
         })();
     </script>
+    <script>lucide.createIcons();</script>
 </body>
 </html>
